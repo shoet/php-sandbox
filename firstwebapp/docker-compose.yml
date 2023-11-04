@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  app:
+    # image: arm64v8/php:8.0-apache
+    build: .
+    container_name: php-container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - "DB_HOST=db"
+      - "DB_PORT=1234"
+      - "DB_DATABASE=exampledb"
+      - "DB_USERNAME=root"
+      - "DB_PASSWORD=secret"
+
+  db:
+    image: arm64v8/mysql:8
+    container_name: mysql-container
+    ports:
+      - "1234:1234"
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=exampledb
+      - MYSQL_USER=exampleuser
+      - MYSQL_PASSWORD=examplepass
+
+volumes:
+  db_data:
