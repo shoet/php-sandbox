@@ -2,3 +2,17 @@ body {
   background-color: black;
   color: white;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+  under-line: none;
+}
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  width: 100%;
+}
