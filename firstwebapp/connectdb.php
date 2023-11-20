@@ -4,9 +4,15 @@
         <title>hoge</title>
     </head>
     <body>
-        <?php try {
-            $dsn = "mysql:host=127.0.0.1;port=1234;dbname=school";
-            $db = new PDO($dsn, "root", "secret");
+        <?php 
+        $host = $_ENV["DB_HOST"];
+        $port = $_ENV["DB_PORT"];
+        $dbname = $_ENV["DB_DATABASE"];
+        $dbuser = $_ENV["DB_USERNAME"];
+        $db_pass = $_ENV["DB_PASSWORD"];
+        try {
+            $dsn = "mysql:host={$host};port={$host};dbname={$dbname};";
+            $db = new PDO($dsn, $dbuser, $db_pass);
             $query = "SELECT * FROM student;";
             $stmt = $db->prepare($query);
             $res = $stmt->execute();
@@ -14,11 +20,11 @@
                 $all = $stmt->fetchAll();
                 foreach($all as $value) {
                     echo "<p>";
-                    echo $value["id"];
-                    echo "&nbsp;" . $value["name"];
+                    echo $value["id"] . "&nbsp;" . $value["name"];
                     echo "</p>";
                 }
             }
+            $db = null;
         } catch(PDOException $e) {
             echo "failed db execution";
             echo $e->getMessage();
