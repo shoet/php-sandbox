@@ -2,6 +2,7 @@
 
 function show_students(array $students)
 {
+    // TODO: リンク
     echo "<table>";
     echo <<<EOF
     <thead>
@@ -15,11 +16,16 @@ function show_students(array $students)
 
     $rows = [];
     foreach ($students as $s) {
+        $href = "./detail.php?id={$s->get_id()}";
         $row = "
             <tr>
-              <td>{$s->get_id()}</td>
-              <td>{$s->get_name()}</td>
-              <td>{$s->get_grade()}</td>
+                <td>{$s->get_id()}</td>
+                <td>
+                    <a href={$href}>
+                        {$s->get_name()}
+                    </a>
+                </td>
+                <td>{$s->get_grade()}</td>
             </tr>
         ";
         array_push($rows, $row);

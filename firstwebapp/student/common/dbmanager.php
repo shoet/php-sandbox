@@ -29,6 +29,31 @@ class DBManager {
         return $students;
     }
 
+    /**
+    * @param $id string
+    */
+    public function get_student($id): array
+    {
+        $students = [];
+        $query = "
+        SELECT
+            *
+        FROM
+            student
+        WHERE
+            id = ?
+        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$id]);
+        $result = $stmt->fetchAll();
+        $students = [];
+        foreach($result as $row) {
+            $student = new Student($row["id"], $row["name"], $row["grade"]);
+            array_push($students, $student);
+        }
+        return $students;
+    }
+
     private function get_dns(): string
     {
         $host = $_ENV["DB_HOST"];

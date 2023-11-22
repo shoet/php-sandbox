@@ -13,5 +13,8 @@
             $students = $dbm->get_all_students();
             show_students($students);
         ?>
+        <p>
+            <a href="./add.php">新しい学生情報の追加</a>
+        </p>
     </body>
 </html>
