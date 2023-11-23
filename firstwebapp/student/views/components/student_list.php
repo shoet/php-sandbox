@@ -1,8 +1,7 @@
 <?php
 
-function show_students(array $students)
+function show_student_list(array $students)
 {
-    // TODO: リンク
     echo "<table>";
     echo <<<EOF
     <thead>
